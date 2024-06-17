@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>UchebShare</title>
+	<script type="text/javascript" th:src="@{hide.js}"></script>
+		<script type="text/javascript" th:src="@{showHidden.js}"></script>
+		<script type="text/javascript" th:src="@{setDefaultAndHideAndShow.js}"></script>
+		<script type="text/javascript" th:src="@{SetDefaultFolder.js}"></script>
+		<style>
+		  #my-profile-link {
+		    float: right;
+		  }
+		</style>
+</head>
+<body>
+	<a id="my-profile-link" href="/userinfo" th:text="${user.name}" style="float: right"></a>
+	<div>
+		<a th:each="folder : ${parentFolders}" th:text="${folder.name} + '/'" th:href="@{'filesview/next?s=' + ${folder.id}}"/>
+		<span th:if="${currentFolderId == user.defaultFolderId}">Default folder</span>
+		<button id="setDefaultFolderBtn" th:if="${currentFolderId != user.defaultFolderId}"
+		        th:onclick="'setDefaultAndHideAndShow(\'' + ${currentFolderId} + '\', \'setDefaultFolderBtn\', \'defaultFolderSpn\')'">
+		    Сделать по умолчанию
+		</button>
+		<span id="defaultFolderSpn" hidden>По умолчанию</span>
+	</div>
+	<a href="filesview/next?s=-1">Назад</a>
+	<div class="hidden" id="add-files-div" hidden>
+		<h2>Загрузить файл</h2>
+		<form method="post" action="/filesview/new-document" enctype="multipart/form-data">
+			<input type="file" name="file" />
+			<button type="submit" th:onclick="hide('add-files-div')">Отправить</button>
+		</form>
+	</div>
+	<div class="hidden" id="add-folder-div" hidden>
+		<h2>Добавить папку</h2>
+		<form method="post" action="/filesview/new-folder">
+			<input type="text" placeholder="foldername" th:field="${newFolder.name}">
+			<button type="submit" th:onclick="hide('add-folder-div')">Добавить</button>
+		</form>
+	</div>
+	<button th:onClick="showHidden('add-files-div')">Добавить файлы</button>
+	<button th:onClick="showHidden('add-folder-div')">Добавить папку</button>
+	<form action="setDefaultFolder">
+	<div th:each="folder : *{folders}">
+		<a th:text="${folder.name}" th:href="@{'filesview/next?s=' + ${folder.id}}"/>
+	</div>
+	<div th:each="doc : *{documents}">
+		<a th:text="${doc.name}" th:href="@{'filesview/view/' + ${doc.id}}">
+	</div>
+</body>
+</html>

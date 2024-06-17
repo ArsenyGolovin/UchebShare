@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>UchebShare</title>
+</head>
+<body>
+	<h2>Мой профиль</h2>
+	<div>
+		<span th:text="'Имя: '+${user.name}"/>
+		<p><a href="/filesview">Просмотр файлов</a></p>
+	</div>
+	<a href="/auth/logout">Выйти</a>
+</body>
+</html>

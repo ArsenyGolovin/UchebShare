@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: uchebShare
+  thymeleaf:
+    cache: false
+  datasource:
+    generate-unique-name: false
+    name: uchebShare
+  servlet:
+    multipart:
+      max-request-size: 500MB

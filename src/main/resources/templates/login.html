@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>UchebShare</title>
+</head>
+<body>
+	<h1>Login</h1>
+	<form method="post" action="/auth/login">
+		<input type="text" th:field="${user.name}" text="name" placeholder="Имя пользователя">
+		<input type="password" th:field="${user.password}" text="password" placeholder="Пароль">
+		<button type="submit">Submit</button>
+	</form>
+</body>
+</html>

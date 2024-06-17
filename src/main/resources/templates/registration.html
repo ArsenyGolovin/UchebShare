@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>UchebShare</title>
+</head>
+<body>
+	<form method="post" action="/auth/registration">
+		<input type="text" th:field="${user.name}" placeholder="Имя пользователя">
+		<input type="password" th:field="${user.password}" text="password" placeholder="Пароль">
+		<select th:field="${user.flowId}">
+			<option th:each="flow : ${flows}" th:text="${flow.name}" th:value="${flow.id}"></option>
+		</select>
+		<button type="submit">Submit</button>
+	</form>
+</body>
+</html>
