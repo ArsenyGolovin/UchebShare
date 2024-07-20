@@ -6,9 +6,11 @@
 <body>
 	<form method="post" action="/auth/registration">
 		<input type="text" th:field="${user.name}" placeholder="Имя пользователя">
+		<!--<span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"}>nameError</span>-->
 		<input type="password" th:field="${user.password}" text="password" placeholder="Пароль">
+		<!--<span class="validationError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"}>passwordError</span>-->
 		<select th:field="${user.flowId}">
-			<option th:each="flow : ${flows}" th:text="${flow.name}" th:value="${flow.id}"></option>
+			<option th:each="flow : ${flows}" th:text="${flow.name}" th:value="${flow.id}">Направление обучения</option>
 		</select>
 		<button type="submit">Submit</button>
 	</form>

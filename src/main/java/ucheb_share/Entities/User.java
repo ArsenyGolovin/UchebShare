@@ -4,6 +4,8 @@ package ucheb_share.Entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -11,8 +13,12 @@ import lombok.Data;
 public class User {
 	@Id
 	int id;
+	@NotNull
+	@Size(min=8, message="Пароль должен содеожать от 8 символов.")
 	String password;
 	
+	@NotNull
+	@Size(min=5, max=20, message="Имя пользователя должно содержать 5-20 символов.")
 	String name;
 	//String surname;
 	//String lastName;

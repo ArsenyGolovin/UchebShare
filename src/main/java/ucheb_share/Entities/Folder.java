@@ -3,6 +3,7 @@ package ucheb_share.Entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -13,6 +14,8 @@ public class Folder {
 	//int flowId;
 	//int flowYear;
 	//short courseNum;
+	
+	@NotNull(message="Введите имя папки")
 	String name;
 	int authorId;
 	int parentFolderId;

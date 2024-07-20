@@ -3,10 +3,10 @@ package ucheb_share.Controllers;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -24,17 +24,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.Valid;
 import ucheb_share.Entities.Document;
 import ucheb_share.Entities.Folder;
 import ucheb_share.Entities.User;
 import ucheb_share.Repositories.DocumentRepository;
 import ucheb_share.Repositories.FolderRepository;
 import ucheb_share.Repositories.UserRepository;
-
-import java.nio.file.Paths;
 @Controller
 @RequestMapping("/filesview")
 @SessionAttributes({"user", "parentFolders"})
+
+
 public class DocumentController {
 	
 	DocumentRepository docRepo;
@@ -77,7 +78,7 @@ public class DocumentController {
 	
 	
 	@PostMapping("new-folder")
-	public String addFolder(Model model, @ModelAttribute("newFolder") Folder newFolder, @ModelAttribute("user") User user) {
+	public String addFolder(Model model, @Valid @ModelAttribute("newFolder") Folder newFolder, @ModelAttribute("user") User user) {
 		newFolder.setParentFolderId(this.getCurrentFolderId(model));
 		newFolder.setAuthorId(user.getId());
 		this.folderRepo.save(newFolder);

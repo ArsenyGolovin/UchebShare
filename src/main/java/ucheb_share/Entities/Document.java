@@ -3,6 +3,7 @@ package ucheb_share.Entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -10,7 +11,7 @@ import lombok.Data;
 public class Document {
 	@Id
 	int id;
-	
+	@NotNull(message="Введите имя файла")
 	String name;
 	//String message;
 	int authorId;
